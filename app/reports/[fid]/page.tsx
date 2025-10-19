@@ -1,12 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Upload, FileText, Download, Trash2, Eye } from "lucide-react"
 
 export default function ReportsPage() {
+    const {fid} = useParams()
+    console.log(fid)
+      localStorage.setItem('fid', fid as string)
   const router = useRouter()
   const [reports, setReports] = useState([
     {

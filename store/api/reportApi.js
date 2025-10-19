@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // reportAPI.js
 export const reportAPI = {
   /**
@@ -6,12 +8,15 @@ export const reportAPI = {
    * Replace this with an actual fetch/axios call to your backend.
    */
   uploadReport: async (formData) => {
+    try {
+        
+
       for (let [key, value] of formData.entries()) {
           console.log(`${key}:`, value)
         }
         console.log(formData)
+          const response = await axios.post(`https://smit-hackathon-backend-phi.vercel.app/api/report/add`, formData);
     // Simulate network latency and return dummy response
-    await new Promise((res) => setTimeout(res, 1200))
 
     // Here you can inspect formData (only for debugging)
     // Example: const file = formData.get("file")
@@ -22,6 +27,9 @@ export const reportAPI = {
         message: "Mock upload successful",
         // optionally echo back some metadata parsed from FormData
       },
+    }
+        } catch (error) {
+        console.log(error)
     }
   },
 

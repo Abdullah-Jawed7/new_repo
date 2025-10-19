@@ -20,6 +20,7 @@ import { uploadReport } from "@/store/thunks/reportThunks"
 import { resetUploadState } from "@/store/slices/reportSlice"
 
 export default function UploadDetailedReportPage() {
+  
   const router = useRouter()
   const dispatch = useAppDispatch()
   const { status, error } = useAppSelector((s) => s.reports || { status: "idle", error: null })
@@ -103,26 +104,28 @@ export default function UploadDetailedReportPage() {
 
     // build FormData
     const fd = new FormData()
-    fd.append("file", data.file)
+    fd.append("reportFile", data.file)
+    fd.append("userId", localStorage.getItem('id') || '')
+    fd.append("familyMemberId",localStorage.getItem('fid') || '')
 
     // append optional fields (only if provided) — keep backend tolerant
     console.log(data?.reportName, data?.reportType, data?.doctorName, data?.hospitalName)
     if (data.reportName){ console.log("inside if") 
-      fd.append("reportName", data.reportName)}
-    if (data.reportType) fd.append("reportType", data.reportType)
+      fd.append("name", data.reportName)}
+    // if (data.reportType) fd.append("reportType", data.reportType)
     if (data.doctorName) fd.append("doctorName", data.doctorName)
     if (data.hospitalName) fd.append("hospitalName", data.hospitalName)
-    if (data.date) {
-      // if date is a Date object
-      const iso = data.date instanceof Date ? formatISO(data.date) : data.date
-      fd.append("date", iso)
-    }
-    if (data.price) fd.append("price", data.price)
-    if (data.notes) fd.append("notes", data.notes)
+    // if (data.date) {
+    //   // if date is a Date object
+    //   const iso = data.date instanceof Date ? formatISO(data.date) : data.date
+    //   fd.append("date", iso)
+    // }
+    // if (data.price) fd.append("price", data.price)
+    // if (data.notes) fd.append("notes", data.notes)
 
     // vitals: only include non-empty pairs
     const vitalsFiltered = (data.vitals || []).filter((v) => v.key || v.value)
-    if (vitalsFiltered.length) fd.append("vitals", JSON.stringify(vitalsFiltered))
+    // if (vitalsFiltered.length) fd.append("vitals", JSON.stringify(vitalsFiltered))
 
     // dispatch thunk
     console.log({fd, data})
