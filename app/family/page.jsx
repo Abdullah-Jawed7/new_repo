@@ -8,6 +8,8 @@ import AddMemberModal from "@/components/family/AddMember"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { User, Heart, Home, Users, Trash2, Plus } from "lucide-react"
+import { useRouter } from "next/router"
+import Link from "next/link"
 
 export default function FamilyMembersPage() {
   const dispatch = useAppDispatch()
@@ -109,7 +111,8 @@ export default function FamilyMembersPage() {
               )}
 
               {items.map((m) => (
-                <div key={m.id} className="rounded-lg border p-4 flex items-center gap-3 shadow-sm ">
+                <Link>
+                <div  key={m.id} className="rounded-lg border p-4 flex items-center gap-3 shadow-sm ">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getAvatarColor(m.relation, m.name)}`}>
                     {relationIcon(m.relation)}
                   </div>
@@ -125,6 +128,7 @@ export default function FamilyMembersPage() {
                     </button>
                   </div>
                 </div>
+                </Link>
               ))}
             </div>
           {/* </CardContent> */}

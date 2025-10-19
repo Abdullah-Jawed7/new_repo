@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Heart, Mail, Lock, User } from "lucide-react"
+import axios from 'axios'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -31,9 +32,9 @@ export default function RegisterPage() {
     setIsLoading(true)
  
       const response = await axios.post(`https://smit-hackathon-backend-phi.vercel.app/api/auth/register`, {
-   userName:`${firstName} ${lastName}`,
-        email,
-    password,
+   userName:`${formData.firstName} ${formData.lastName}`,
+        email:formData.email,
+    password:formData.password,
   });
   console.log(response)
   if (response.data.status) {
