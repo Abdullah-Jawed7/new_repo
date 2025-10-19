@@ -8,7 +8,7 @@ export const fetchFamilyMembers = createAsyncThunk(
     try {
         console.log('upper')
       const res = await familyAPI.getFamilyMembers()
-      console.log('lower')
+      console.log('lower', res)
       if (!res.ok) return thunkAPI.rejectWithValue("Failed to load members")
       return res.data
     } catch (err) {

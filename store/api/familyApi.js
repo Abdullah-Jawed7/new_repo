@@ -7,17 +7,29 @@ export const familyAPI = {
         const userId = localStorage.getItem('id') || "68f401698732e9530623d0ee"
              const response = await axios.get(`https://smit-hackathon-backend-phi.vercel.app/api/familyMember/all/${userId}`);
 console.log(response)
-             if (response.data.status) {
-    return response.data.data
-}
+            //  if (response.data.status) {
     return {
       ok: true,
-      data: [
+      data: response?.data?.data || [
         { id: "m_1", name: "Aisha Khan", relation: "Mother", avatarColor: "bg-rose-200" },
         { id: "m_2", name: "Bilal Khan", relation: "Spouse", avatarColor: "bg-sky-200" },
         { id: "m_3", name: "Sara Khan", relation: "Daughter", avatarColor: "bg-amber-200" },
       ],
     }
+    // response?.data?.data || [
+    //     { id: "m_1", name: "Aisha Khan", relation: "Mother", avatarColor: "bg-rose-200" },
+    //     { id: "m_2", name: "Bilal Khan", relation: "Spouse", avatarColor: "bg-sky-200" },
+    //     { id: "m_3", name: "Sara Khan", relation: "Daughter", avatarColor: "bg-amber-200" },
+    //   ]
+// }
+    // return {
+    //   ok: true,
+    //   data: [
+    //     { id: "m_1", name: "Aisha Khan", relation: "Mother", avatarColor: "bg-rose-200" },
+    //     { id: "m_2", name: "Bilal Khan", relation: "Spouse", avatarColor: "bg-sky-200" },
+    //     { id: "m_3", name: "Sara Khan", relation: "Daughter", avatarColor: "bg-amber-200" },
+    //   ],
+    // }
         } catch (error) {
          console.log(error)
     }

@@ -80,7 +80,7 @@ export default function FamilyMembersPage() {
     if (!confirm("Remove this family member?")) return
     await dispatch(deleteFamilyMember(id))
   }
-
+console.log({items})
   return (
     <div className="space-y-6 p-4">
       <div className="flex items-center justify-between py-4">
@@ -106,19 +106,19 @@ export default function FamilyMembersPage() {
             {status === "failed" && <p className="text-sm text-destructive">{error}</p>}
 
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {items.length === 0 && status === "succeeded" && (
+              {items?.length === 0 && status === "succeeded" && (
                 <div className="text-sm text-muted-foreground">No members yet — add one.</div>
               )}
 
-              {items.map((m) => (
-                <Link>
-                <div  key={m.id} className="rounded-lg border p-4 flex items-center gap-3 shadow-sm ">
+              {items?.map((m) => (
+                <Link href={`/reports/${m._id}`}>
+                <div  key={m._id} className="rounded-lg border p-4 flex items-center gap-3 shadow-sm ">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getAvatarColor(m.relation, m.name)}`}>
                     {relationIcon(m.relation)}
                   </div>
 
                   <div className="flex-1">
-                    <div className="font-medium text-foreground">{m.name}</div>
+                    <div className="font-medium text-foreground">{m.memberName}</div>
                     <div className="text-sm text-muted-foreground">{m.relation || "—"}</div>
                   </div>
 
