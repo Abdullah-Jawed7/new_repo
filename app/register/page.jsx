@@ -24,15 +24,38 @@ export default function RegisterPage() {
   }
 
   const handleRegister = async (e) => {
+    
+    
     e.preventDefault()
+    try {
     setIsLoading(true)
-
-    // DUMMY DATA - Replace with real API call
-    setTimeout(() => {
-      localStorage.setItem("authToken", "dummy-token-" + Date.now())
+ 
+      const response = await axios.post(`https://smit-hackathon-backend-phi.vercel.app/api/auth/register`, {
+   userName:`${firstName} ${lastName}`,
+        email,
+    password,
+  });
+  console.log(response)
+  if (response.data.status) {
+    localStorage.setItem("authToken", response?.data?.data?.token,)
       router.push("/dashboard")
       setIsLoading(false)
-    }, 1000)
+    } else {
+      alert('something went wrong')
+    setIsLoading(false)
+    
+  }
+    } catch (error) {
+         alert('something went wrong')
+      console.log(error)
+    }
+    // DUMMY DATA - Replace with real API call
+    // setTimeout(() => {
+
+    //   localStorage.setItem("authToken", "dummy-token-" + Date.now())
+    //   router.push("/dashboard")
+    //   setIsLoading(false)
+    // }, 1000)
   }
 
   return (

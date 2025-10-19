@@ -6,7 +6,9 @@ export const fetchFamilyMembers = createAsyncThunk(
   "family/fetchMembers",
   async (_, thunkAPI) => {
     try {
+        console.log('upper')
       const res = await familyAPI.getFamilyMembers()
+      console.log('lower')
       if (!res.ok) return thunkAPI.rejectWithValue("Failed to load members")
       return res.data
     } catch (err) {
@@ -19,10 +21,13 @@ export const addFamilyMember = createAsyncThunk(
   "family/addMember",
   async (payload, thunkAPI) => {
     try {
+        console.log(payload)
       const res = await familyAPI.addFamilyMember(payload)
+      console.log("lower")
       if (!res.ok) return thunkAPI.rejectWithValue("Failed to add member")
       return res.data
     } catch (err) {
+        console.log(err)
       return thunkAPI.rejectWithValue(err.message || "Failed to add member")
     }
   }

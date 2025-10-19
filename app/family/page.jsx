@@ -68,6 +68,7 @@ export default function FamilyMembersPage() {
     setLoadingAdd(true)
     // optional avatarColor for nicer UI
     const avatarColor = "bg-indigo-200"
+    console.log(vals)
     await dispatch(addFamilyMember({ ...vals, avatarColor }))
     setLoadingAdd(false)
     setOpen(false)

@@ -43,8 +43,9 @@ export const loginUserApi = async (email, password) => {
     email,
     password,
   });
-  if (response?.data?.data?.status) {
+  if (response?.data?.status) {
     
+    localStorage.setItem('id','68f401698732e9530623d0ee')
     console.log(response)
     localStorage.setItem('id',response?.data?.data?._id)
     console.log({email,password})

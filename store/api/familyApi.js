@@ -15,7 +15,9 @@ export const familyAPI = {
   },
 
   async addFamilyMember(payload) {
-    await new Promise((r) => setTimeout(r, 600))
+    console.log(payload)
+    try {
+    console.log(payload)
      const response = await axios.post(`https://smit-hackathon-backend-phi.vercel.app/api/familyMember/add`, {
    userId:localStorage.getItem('id'), memberName:payload.name, relation:payload.relation
   });
@@ -29,6 +31,10 @@ export const familyAPI = {
         avatarColor: payload.avatarColor || "bg-slate-200",
       },
     }
+        } catch (error) {
+        console.log(error)
+    }
+    
   },
 
   async deleteFamilyMember(id) {
